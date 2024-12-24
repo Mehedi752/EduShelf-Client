@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../customHooks/useAuth';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const BookDetails = () => {
     const book = useLoaderData();
@@ -14,7 +15,7 @@ const BookDetails = () => {
     const navigate = useNavigate();
 
     // Open/Close Modal
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
+    // const toggleModal = () => setIsModalOpen(!isModalOpen);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,20 +23,46 @@ const BookDetails = () => {
         if (book.quantity > 0) {
 
             // Decrease book quantity using MongoDB's $inc operator
-            axios.patch(`/books/${book._id}`, {
+            axios.put(`http://localhost:5000/books/${book._id}`, {
                 quantity: -1, // Use $inc operator in MongoDB
-            });
+            })
+                .then(data => {
+                    // console.log('Book quantity decreased', data);
+                })
+
+
             // Add to Borrowed Books List (you can store this in the DB or local storage)
-            axios.post('/borrowed-books', {
+            axios.post('http://localhost:5000/borrowedBooks', {
                 bookId: book._id,
                 userId: user.uid,
+                name: user.displayName,
+                email: user.email,
                 returnDate,
-            });
+            })
+                .then(data => {
+                    // console.log('Book borrowed', data);
+                    if (data.status === 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Book Borrowed Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
 
-            // Update UI or redirect to borrowed books page
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Something went wrong',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    }
+
+                })
+
             navigate('/borrowedBooks');
 
-            toggleModal(); // Close modal
         }
     };
     return (
@@ -76,67 +103,88 @@ const BookDetails = () => {
                     </div>
 
                     <div className="flex gap-3">
-                        <button onClick={toggleModal} className="btn bg-[#1a237e] hover:bg-blue-700 text-white">Borrow</button>
+                        <button onClick={() => setIsModalOpen(true)} disabled={book.quantity === 0} className="btn bg-[#1a237e] hover:bg-blue-700 text-white">Borrow</button>
                     </div>
 
                 </div>
             </div>
 
-            // Modal
-            {isModalOpen && (
-                <div className="modal-overlay">
-                    <div className="modal-container">
-                        <h3 className="modal-title">Borrow Book</h3>
-                        <form onSubmit={handleSubmit} className="modal-form">
-                            <div className="form-group">
-                                <label>Name:</label>
+
+            {/* Modal */}
+            {
+                isModalOpen &&
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-8 rounded shadow-lg w-96">
+                        <h2 className="text-xl font-bold mb-4 text-center">Borrow Books</h2>
+                        <form onSubmit={handleSubmit}>
+
+                            {/* Email */}
+                            <div className="mb-4">
+                                <label className="block font-medium mb-2">Name</label>
                                 <input
                                     type="text"
                                     name="name"
+                                    className='w-full p-2 border rounded bg-gray-200'
                                     value={user.displayName || ''}
                                     disabled
                                     required
                                 />
                             </div>
 
-                            <div className="form-group">
-                                <label>Email:</label>
+
+                            {/* First Name */}
+                            <div className="mb-4">
+                                <label className="block font-medium mb-2">Email</label>
                                 <input
                                     type="email"
                                     name="email"
+                                    className='w-full p-2 border rounded bg-gray-200'
                                     value={user.email || ''}
                                     disabled
                                     required
                                 />
                             </div>
 
-                            <div className="form-group">
-                                <label>Return Date:</label>
+                            {/* Last Name */}
+                            <div className="mb-4">
+                                <label className="block font-medium mb-2">Return Date</label>
                                 <input
                                     type="date"
                                     name="returnDate"
+                                    className='w-full p-2 border rounded bg-gray-200'
                                     value={returnDate}
                                     onChange={(e) => setReturnDate(e.target.value)}
                                     required
                                 />
                             </div>
 
-                            <div className="form-actions">
-                                <button type="submit" className="btn btn-accent">
-                                    Submit
-                                </button>
+
+
+                            <div className="flex gap-3">
+
+                                {/* Submit Button */}
                                 <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={toggleModal}
+                                    type="submit"
+                                    className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                >
+                                    Apply
+                                </button>
+
+                                {/* Close Modal */}
+                                <button
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="w-full py-2 bg-red-600 text-white rounded hover:bg-red-700"
                                 >
                                     Cancel
                                 </button>
+
                             </div>
                         </form>
+
+
                     </div>
                 </div>
-            )}
+            }
         </div>
     );
 };
