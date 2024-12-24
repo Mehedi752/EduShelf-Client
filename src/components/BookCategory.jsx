@@ -40,7 +40,7 @@ const BookCategory = () => {
                             {/* Details Button */}
                             <div className="mb-2">
                                 <Link
-                                    to={`/book/${book.id}`}
+                                    to={`/books/details/${book._id}`}
                                     className="text-white bg-[#1a237e] hover:bg-blue-700 py-2 px-6 rounded-lg inline-block transition-colors duration-300"
                                 >
                                     Details

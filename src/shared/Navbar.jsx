@@ -88,7 +88,7 @@ const Navbar = () => {
                         }
                         {
                             user && user.email ? (
-                                <button onClick={handleLogOut} className="btn bg-[#1a237e] hover:bg-blue-700 text-white">Logout</button>
+                                <button onClick={handleLogOut} className="btn border-none bg-[#1a237e] hover:bg-blue-700 text-white">Logout</button>
                             ) : (
                                 <Link to={'/auth/login'} className="btn bg-[#1a237e] border-none hover:bg-blue-700 text-white">Login</Link>
                             )

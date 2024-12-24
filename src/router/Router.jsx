@@ -6,6 +6,9 @@ import Home from "../pages/Home";
 import Register from "../auth/Register";
 import Login from "../auth/Login";
 import BookCategory from "../components/BookCategory";
+import BookDetails from "../components/BookDetails";
+import PrivateRoute from "../provider/PrivateRoute";
+import BorrowedBooks from "../pages/BorrowedBooks";
 
 
 const Router = createBrowserRouter([
@@ -30,8 +33,17 @@ const Router = createBrowserRouter([
                 path: '/books/:category',
                 element: <BookCategory></BookCategory>,
                 loader: ({ params }) => fetch(`http://localhost:5000/books/${params.category}`)
+            },
+            {
+                path: '/books/details/:id',
+                element: <PrivateRoute><BookDetails></BookDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/books/details/${params.id}`)
+            },
+
+            {
+                path: '/borrowedBooks',
+                element: <PrivateRoute><BorrowedBooks></BorrowedBooks></PrivateRoute>
             }
-           
         ]
     },
 ]);
