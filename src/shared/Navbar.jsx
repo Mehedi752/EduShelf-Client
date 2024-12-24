@@ -1,58 +1,99 @@
-import React from 'react';
+import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+import { useContext } from "react";
+import logoImg from '../assets/logo.png';
+import useAuth from "../customHooks/useAuth";
 
 const Navbar = () => {
+    const { user, signOutUser, loading, setLoading } = useAuth();
+    const links = <>
+        <li><Link to={'/'}>Home</Link></li>
+        {
+            user &&
+            <>
+                <li><Link to={'/books'}>All Books</Link></li>
+                <li><Link to={'/addBooks'}>Add Books</Link></li>
+                <li><Link to={'/borrowedBooks'}>Borrowed Books</Link></li>
+            </>
+        }
+    </>
+
+    const handleLogOut = () => {
+        signOutUser()
+            .then(() => {
+                //console.log('User signed out')
+            })
+            .catch(error => {
+
+                //console.log(error)
+            })
+    };
+
     return (
-        <div>
-            <div className="navbar bg-base-100">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
+        <div className="bg-[#d1f7c4] py-5">
+            <div className="container mx-auto">
+                <div className="navbar flex items-center">
+                    <div className="navbar-start">
+                        <div className="dropdown">
+                            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4 6h16M4 12h8m-8 6h16" />
+                                </svg>
+                            </div>
+                            <ul
+                                tabIndex={0}
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                {links}
+                            </ul>
                         </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a>Item 1</a></li>
-                            <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Item 3</a></li>
+
+                        <div className="flex items-center gap-2">
+                            <img src={logoImg} alt="" className="w-10 h-10" />
+                            <h3 className="text-2xl">EduShelf</h3>
+                        </div>
+
+                    </div>
+                    <div className="navbar-center hidden lg:flex">
+                        <ul className="menu menu-horizontal px-1">
+                            {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
-                </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
-                                </ul>
-                            </details>
-                        </li>
-                        <li><a>Item 3</a></li>
-                    </ul>
-                </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <div className="navbar-end gap-5">
+                        {
+                            user && user.photoURL ? (
+                                <div className="relative group">
+                                    <img
+                                        src={user.photoURL}
+                                        alt=""
+                                        className="w-8 h-8 rounded-full"
+                                    />
+                                    <p
+                                        className="absolute top-8 w-[120px] text-center mt-1 left-1/2 transform -translate-x-1/2 bg-blue-500  text-white text-xs font-semibold rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        {user.displayName}
+                                    </p>
+                                </div>
+
+                            ) : (
+                                <Link to={'/auth/register'} className="underline text-black hover:text-blue-700">Register</Link>
+                            )
+                        }
+                        {
+                            user && user.email ? (
+                                <button onClick={handleLogOut} className="btn bg-[#1a237e] hover:bg-blue-700 text-white">Logout</button>
+                            ) : (
+                                <Link to={'/auth/login'} className="btn bg-[#1a237e] border-none hover:bg-blue-700 text-white">Login</Link>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
         </div>
