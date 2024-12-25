@@ -1,8 +1,27 @@
-# React + Vite
+# EduShelf - Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Purpose
+The **EduShelf - Library Management System** is a web application designed for managing books in a library. It allows users to browse, borrow, and return books easily. The system is designed to be efficient and user-friendly with features like browsing books by category, viewing borrowed books, and managing book information. Admins can also update book details and track the statistics of borrowed and returned books.
 
-Currently, two official plugins are available:
+## Live URL
+[Library Management System - Live Demo](https://your-live-url.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
+- **Book Catalog:** Browse and filter books by category, title, author, and rating.
+- **Borrowing Books:** Users can borrow books, and the system keeps track of the borrowed books.
+- **Book Return:** Users can return borrowed books, which will update the inventory.
+- **Admin Panel:** Admins can update book details, including the image, title, author, category, and rating.
+- **Private Routes:** Certain pages like borrowing and returning books are protected by authentication.
+- **Responsive Design:** Fully responsive layout, ensuring a seamless experience on mobile devices.
+- **Animations:** Eye-catching animations using **Framer Motion** to enhance the user experience.
+
+## npm Packages Used
+The following npm packages have been used in the development of this project:
+
+- **React**: JavaScript library for building user interfaces.
+- **react-router-dom**: Routing library for navigation between pages.
+- **axios**: Promise-based HTTP client for making API requests.
+- **react-toastify**: Toasts for notifications and alerts.
+- **framer-motion**: Library for adding animations to the project.
+- **react-rating-stars-component**: Component for displaying star ratings.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
