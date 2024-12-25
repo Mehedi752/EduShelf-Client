@@ -12,13 +12,14 @@ import BorrowedBooks from "../pages/BorrowedBooks";
 import AllBooks from "../pages/AllBooks";
 import UpdateBook from "../pages/UpdateBook";
 import AddBooks from "../pages/AddBooks";
+import ErrorPage from "../pages/ErrorPage";
 
 
 const Router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
-        errorElement: <div className="text-center text-3xl">404 Not Found</div>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
