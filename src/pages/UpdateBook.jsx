@@ -117,7 +117,7 @@ const UpdateBook = () => {
                                 </span>
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 name="rating"
                                 defaultValue={book.rating}
                                 onChange={handleChange}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../customHooks/useAuth';
 import axios from 'axios';
@@ -14,8 +14,16 @@ const BookDetails = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [returnDate, setReturnDate] = useState('');
+    const [borrowedBooks, setBorrowedBooks] = useState([]);
     const { user } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/borrowedBooks')
+            .then(data => {
+                setBorrowedBooks(data.data);
+            })
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,6 +42,17 @@ const BookDetails = () => {
         }
 
         if (book.quantity > 0) {
+
+            const isBookAlreadyBorrowed = borrowedBooks.map((borrowedBook) => borrowedBook.bookId).includes(book._id);
+            if (isBookAlreadyBorrowed) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Book Already Borrowed',
+                    text: 'You have already borrowed this book.',
+                    timer: 2000,
+                });
+                return;
+            }
 
             // Decrease book quantity using MongoDB's $inc operator
             axios.put(`http://localhost:5000/books/${book._id}`, {
@@ -118,7 +137,7 @@ const BookDetails = () => {
                     </div>
 
                     <div className="flex gap-3">
-                        <button onClick={() => setIsModalOpen(true)} disabled={book.quantity === 0} className="btn bg-[#1a237e] hover:bg-blue-700 text-white">Borrow</button>
+                        <button onClick={() => setIsModalOpen(true)} disabled={parseInt(book.quantity) === 0} className="btn bg-[#1a237e] hover:bg-blue-700 text-white">Borrow</button>
                     </div>
 
                 </div>

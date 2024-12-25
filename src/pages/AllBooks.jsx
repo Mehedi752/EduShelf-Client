@@ -5,7 +5,12 @@ const AllBooks = () => {
     const books = useLoaderData();
     const [view, setView] = useState('card');
     const navigate = useNavigate();
-    
+    const [showAvailable, setShowAvailable] = useState(false);
+
+    const filteredBooks = showAvailable
+        ? books.filter((book) => book.quantity > 0)
+        : books;
+
     const handleUpdate = (id) => {
         // Navigate to update page
         navigate(`/books/update/${id}`);
@@ -16,11 +21,20 @@ const AllBooks = () => {
             <h1 className="text-4xl font-semibold text-center mb-8">All Books</h1>
 
             {/* View Toggle */}
-            <div className="flex justify-end mb-6">
+            <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
+                <button
+                    onClick={() => setShowAvailable(!showAvailable)}
+                    className={`border px-4 py-2 rounded text-sm transition-colors duration-300 ${showAvailable
+                            ? 'bg-green-600 text-white font-medium'
+                            : 'bg-red-500 text-white font-medium'
+                        }`}
+                >
+                    {showAvailable ? 'Show All Books' : 'Show Available Books'}
+                </button>
                 <select
                     value={view}
                     onChange={(e) => setView(e.target.value)}
-                    className="border border-gray-300 rounded px-4 py-2"
+                    className="border border-gray-300 rounded px-4 py-2 text-sm"
                 >
                     <option value="card">Card View</option>
                     <option value="table">Table View</option>
@@ -30,7 +44,7 @@ const AllBooks = () => {
             {/* Card View */}
             {view === 'card' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {books.map((book) => (
+                    {filteredBooks.map((book) => (
                         <div key={book._id} className="border rounded-lg shadow-md p-6">
                             <img
                                 src={book.image}
@@ -66,7 +80,7 @@ const AllBooks = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {books.map((book) => (
+                        {filteredBooks.map((book) => (
                             <tr key={book._id} className="border-t font-medium">
                                 <td className="px-4 py-4">
                                     <img
