@@ -32,21 +32,10 @@ const Register = () => {
                     email = result.user.email,
                     createdTime = result.user.metadata.creationTime;
                 const newUser = { name, photo, email, createdTime }
-                // fetch("https://espresso-coffee-server-jade.vercel.app/users", {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify(newUser)
-                // }
-                // )
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         ////console.log(data)
-                //     })
+        
 
                 navigate(location?.state ? location.state : '/');
-                toast.success(`Congrats ${result.user.displayName} Your Login Success With Google in The Job Portal Website!`, {
+                toast.success(`Congrats ${result.user.displayName} Your Login Success With Google in The EduShelf Library!`, {
                     position: "top-center",
                     autoClose: 2000,
                     pauseOnHover: true,
@@ -118,24 +107,12 @@ const Register = () => {
                 setUser(result.user)
                 const createdTime = result.user.metadata.creationTime;
                 const newUser = { name, photo, email, createdTime }
-                // fetch("https://espresso-coffee-server-jade.vercel.app/users", {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify(newUser)
-                // }
-                // )
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         ////console.log(data)
-                //     })
-
+             
 
                 updateProfileUser({ displayName: name, photoURL: photo })
                     .then(() => {
                         navigate(location?.state ? location.state : '/');
-                        toast.success(`Congrats ${result.user.displayName},Your Register Success in The Job Portal Website!`, {
+                        toast.success(`Congrats ${result.user.displayName},Your Register Success in The The EduShelf Library!`, {
                             position: "top-center",
                             autoClose: 2000,
                             pauseOnHover: true,

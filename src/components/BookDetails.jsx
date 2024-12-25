@@ -3,6 +3,9 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../customHooks/useAuth';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { format } from 'date-fns';
+import BookCategory from './BookCategory';
+
 
 const BookDetails = () => {
     const book = useLoaderData();
@@ -14,17 +17,27 @@ const BookDetails = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
 
-    // Open/Close Modal
-    // const toggleModal = () => setIsModalOpen(!isModalOpen);
-
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const borrowedDate = new Date();
+        const returnedDate = new Date(returnDate);
+
+        if (returnedDate <= borrowedDate) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Return Date',
+                text: 'Return date must be after the borrowed date.',
+                timer: 2000,
+            });
+            return;
+        }
 
         if (book.quantity > 0) {
 
             // Decrease book quantity using MongoDB's $inc operator
             axios.put(`http://localhost:5000/books/${book._id}`, {
-                quantity: -1, // Use $inc operator in MongoDB
+                quantity: -1,
             })
                 .then(data => {
                     // console.log('Book quantity decreased', data);
@@ -34,9 +47,13 @@ const BookDetails = () => {
             // Add to Borrowed Books List (you can store this in the DB or local storage)
             axios.post('http://localhost:5000/borrowedBooks', {
                 bookId: book._id,
+                bookImage: book.image,
+                bookName: book.name,
+                bookCategory: book.category,
                 userId: user.uid,
-                name: user.displayName,
+                userName: user.displayName,
                 email: user.email,
+                borrowedDate: format(new Date(), "yyyy-MM-dd"),
                 returnDate,
             })
                 .then(data => {
@@ -49,19 +66,17 @@ const BookDetails = () => {
                             timer: 1500
                         })
                     }
-
-                    else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Something went wrong',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    }
-
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Something went wrong',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 })
 
-            navigate('/borrowedBooks');
+            navigate(`/books/${category}`);
 
         }
     };
@@ -145,7 +160,19 @@ const BookDetails = () => {
                                 />
                             </div>
 
-                            {/* Last Name */}
+                            {/* Borrowed Date */}
+                            <div className="mb-4">
+                                <label className="block font-medium mb-2">Borrowed Date</label>
+                                <input
+                                    type="text"
+                                    name="borrowedDate"
+                                    value={format(new Date(), "dd-MM-yyyy")}
+                                    disabled
+                                    className="w-full p-2 border rounded bg-gray-200"
+                                />
+                            </div>
+
+                            {/* Return Date */}
                             <div className="mb-4">
                                 <label className="block font-medium mb-2">Return Date</label>
                                 <input

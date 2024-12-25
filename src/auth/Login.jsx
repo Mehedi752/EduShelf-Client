@@ -63,7 +63,7 @@ const Login = () => {
             .then(result => {
                 console.log(result)
                 setUser(result.user)
-                toast.success(`Congrats ${result.user.displayName}, Your Login Success in The Job Portal Website!`, {
+                toast.success(`Congrats ${result.user.displayName}, Your Login Success in The The EduShelf Library!`, {
                     position: "top-center",
                     autoClose: 2000,
                     pauseOnHover: true,
