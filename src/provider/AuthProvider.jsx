@@ -51,17 +51,17 @@ const AuthProvider = ({ children }) => {
     // Check if any user is logged in
     useEffect(() => {
         const unsubcribe = onAuthStateChanged(auth, currentUser => {
-            console.log('Current State : ', currentUser?.email)
+            //console.log('Current State : ', currentUser?.email)
 
             if (currentUser?.email) {
                 setUser(currentUser);
                 setLoading(false);
                 const user = { email: currentUser.email };
-                axios.post('https://http://localhost:5000/jwt', user, {
+                axios.post('https://library-management-server-xi-six.vercel.app/jwt', user,{
                     withCredentials: true,
                 })
                     .then(res => {
-                        console.log('Login token',res.data);
+                        //console.log('Login token',res.data);
                     })
             } 
             
@@ -69,11 +69,11 @@ const AuthProvider = ({ children }) => {
                 setUser(null);
                 setLoading(false);
                 
-                axios.post('http://localhost:5000/logout', {}, {
+                axios.post('https://library-management-server-xi-six.vercel.app/logout', {}, {
                     withCredentials: true,
                 })
                     .then(res => {
-                        console.log('Logout token : ',res.data);
+                        //console.log('Logout token : ',res.data);
                     })
 
             }

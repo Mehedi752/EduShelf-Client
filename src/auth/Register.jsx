@@ -25,7 +25,7 @@ const Register = () => {
     const handleLogInWithGoogle = () => {
         signInWithGoogle()
             .then(result => {
-                console.log(result.user)
+                //console.log(result.user)
                 setUser(result.user);
                 const name = result.user.displayName,
                     photo = result.user.photoURL,
@@ -100,7 +100,7 @@ const Register = () => {
 
 
         const user = { name, photo, email, password }
-        //console.log(user)
+        ////console.log(user)
 
         createNewUser(email, password)
             .then(result => {
@@ -130,7 +130,7 @@ const Register = () => {
                     })
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 toast.error(`${error.message}`, {
                     position: "top-center",
                     autoClose: 2000,
@@ -141,7 +141,7 @@ const Register = () => {
     }
 
     return (
-        <div className="bg-[#f3f3f3] pb-[70px]">
+        <div className="bg-[#f3f3f3] pb-[70px] px-5 lg:px-0">
 
             <div className="container mx-auto py-10 lg:py-[50px]">
                 <div className="mb-12">

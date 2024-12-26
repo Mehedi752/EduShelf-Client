@@ -1,14 +1,20 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Rating from 'react-rating-stars-component';
+import { IoMdArrowBack } from 'react-icons/io';
 
 
 const BookCategory = () => {
     const books = useLoaderData();
-    console.log(books)
+    //console.log(books)
     return (
         <div className='container mx-auto py-10 px-5 lg:px-0'>
             <h1 className="text-4xl font-semibold text-center mb-12">Explore Books in Categories</h1>
+
+            <div className="mb-12">
+                <Link to={"/"} className="text-gray-700 flex items-center gap-2 text-2xl lg:text-3xl font-normal font-['Rancho']">
+                    <IoMdArrowBack /> Back to home</Link>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-[100px]">
                 {books.map((book) => (
@@ -25,8 +31,8 @@ const BookCategory = () => {
                             <p className="mb-2 text-lg font-medium">Available : <span className="opacity-50">{book.quantity}</span></p>
 
                             {/* Rating Component */}
-                            <div className="mb-2 flex items-center gap-2"> 
-                                <span className="text-lg font-medium">Ratting :</span> 
+                            <div className="mb-2 flex items-center gap-2">
+                                <span className="text-lg font-medium">Ratting :</span>
                                 <Rating
                                     count={5}
                                     value={book.rating}

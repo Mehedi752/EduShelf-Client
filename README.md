@@ -4,7 +4,7 @@
 The **EduShelf - Library Management System** is a web application designed for managing books in a library. It allows users to browse, borrow, and return books easily. The system is designed to be efficient and user-friendly with features like browsing books by category, viewing borrowed books, and managing book information. Admins can also update book details and track the statistics of borrowed and returned books.
 
 ## Live URL
-[Library Management System - Live Demo](https://your-live-url.com)
+[Library Management System - Live Demo](https://assignment---11-21024.web.app)
 
 ## Key Features
 - **Book Catalog:** Browse and filter books by category, title, author, and rating.

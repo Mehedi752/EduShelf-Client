@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://http://localhost:5000',
+    baseURL: 'https://library-management-server-xi-six.vercel.app',
     withCredentials: true,
 });
 
@@ -15,14 +15,14 @@ const useAxiosSecure = () => {
         axiosInstance.interceptors.response.use(
             response => response,
             error => {
-                if (error.response.status === 401) {
-                    console.log('Unauthenticated');
+                if (error.response && error.response.status === 401) {
+                    //console.log('Unauthenticated');
                     signOutUser()
                         .then(() => {
                             navigate('/auth/login')
                         })
                         .catch(error => {
-                            console.log(error);
+                            //console.log(error);
                         })
                 }
                 return Promise.reject(error);

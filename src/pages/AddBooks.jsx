@@ -9,9 +9,16 @@ const AddBooks = () => {
         const formData = new FormData(e.target);
         const initialData = Object.fromEntries(formData.entries());
 
-        axios.post('http://localhost:5000/books', initialData)
+        if (!initialData.name || !initialData.author || !initialData.category || !initialData.quantity || !initialData.rating || !initialData.image || !initialData.description) {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill all the fields!',
+            });
+        }
+        axios.post('http://localhosthttps://library-management-server-xi-six.vercel.app/books', initialData)
             .then((res) => {
-                console.log(res.data);
+                //console.log(res.data);
                 Swal.fire({
                     icon: 'success',
                     title: 'Book Added',
@@ -20,10 +27,11 @@ const AddBooks = () => {
                 });
             })
             .catch((error) => console.error('Error adding book:', error));
+
     }
     return (
         <div className="bg-[#f3f3f3]">
-            <div className="container mx-auto py-12 px-5 md:px-[100px] lg:px-[400px]">
+            <div className="container mx-auto py-12 px-5 md:px-[100px] lg:px-[300px]">
                 <div className="bg-white p-10 md:p-[50px] lg:p-[100px] rounded-[10px] shadow-lg">
                     <h1 className="text-3xl font-semibold text-center mb-8">Add Book</h1>
                     <form onSubmit={handleSubmit} className="mx-auto space-y-6">
@@ -72,10 +80,10 @@ const AddBooks = () => {
                                 <option value="Marketing">Novel</option>
                                 <option value="Sales">History</option>
                                 <option value="Customer Support">Drama</option>
-            
+
                             </select>
                         </div>
-                    
+
 
                         <div className="mb-4">
                             <label className='label'>

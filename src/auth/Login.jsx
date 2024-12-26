@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { IoMdArrowBack } from 'react-icons/io'
-import axios from 'axios'
 import useAuth from '../customHooks/useAuth'
 
 const Login = () => {
@@ -23,14 +22,7 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 setUser(result.user);
-                console.log(result.user);
-                const user = { email: result.user.email }
-                axios.post('http://localhost:5000/jwt', user, {
-                    withCredentials: true,
-                })
-                    .then(res => {
-                        console.log(res.data);
-                    })
+                //console.log(result.user);
 
                 navigate(location?.state ? location.state : '/');
                 toast.success(`Congrats ${result.user.displayName}, Your Login Success in The Job Portal Website!`, {
@@ -42,7 +34,7 @@ const Login = () => {
 
             })
             .catch(error => {
-                console.log(error)
+                //console.log(error)
                 toast.error(`${error.message}`, {
                     position: "top-center",
                     autoClose: 2000,
@@ -61,7 +53,7 @@ const Login = () => {
 
         signInUser(email, password)
             .then(result => {
-                console.log(result)
+                //console.log(result)
                 setUser(result.user)
                 toast.success(`Congrats ${result.user.displayName}, Your Login Success in The The EduShelf Library!`, {
                     position: "top-center",
@@ -72,7 +64,7 @@ const Login = () => {
                 navigate(location?.state ? location.state : '/')
             })
             .catch(error => {
-                console.log(error)
+                //console.log(error)
                 toast.error(`${error.message}`, {
                     position: "top-center",
                     autoClose: 2000,
@@ -89,10 +81,10 @@ const Login = () => {
     }
 
     return (
-        <div className="bg-[#f3f3f3] pb-[70px]">
-            <div className="container mx-auto py-10 lg:py-[50px]">
+        <div className="bg-[#f3f3f3] pb-[70px] px-5 lg:px-0">
+            <div className="container mx-auto py-10 lg:py-[50px]"> 
                 <div className="mb-12">
-                    <Link to={"/"} className="text-gray-700 flex items-center gap-2 text-3xl font-normal font-['Rancho']">
+                    <Link to={"/"} className="text-gray-700 flex items-center gap-2 text-2xl lg:text-3xl font-normal font-['Rancho']">
                         <IoMdArrowBack /> Back to home</Link>
                 </div>
                 <div className='lg:px-[300px] px-10'>

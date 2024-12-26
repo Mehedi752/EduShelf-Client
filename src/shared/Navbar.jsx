@@ -21,11 +21,11 @@ const Navbar = () => {
     const handleLogOut = () => {
         signOutUser()
             .then(() => {
-                //console.log('User signed out')
+                ////console.log('User signed out')
             })
             .catch(error => {
 
-                //console.log(error)
+                ////console.log(error)
             })
     };
 

@@ -3,13 +3,21 @@ import { set } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAuth from '../customHooks/useAuth';
+import useAxiosSecure from '../customHooks/useAxiosSecure';
 
 const BorrowedBooks = () => {
-    const books = useLoaderData();
+    const { user } = useAuth();
     const [borrowedBooks, setBorrowedBooks] = useState([]);
+    const axiosSecure = useAxiosSecure();
     useEffect(() => {
-        setBorrowedBooks(books);
+        axiosSecure.get(`/borrowedBooks?email=${user.email}`)
+            .then((res) => {
+                setBorrowedBooks(res.data);
+            });
+
     }, []);
+    //console.log(borrowedBooks);
 
 
     const handleReturnButton = (borrowedBookId, bookId) => {
@@ -23,10 +31,10 @@ const BorrowedBooks = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/borrowedBooks/${borrowedBookId}`)
+                axios.delete(`https://library-management-server-xi-six.vercel.app/borrowedBooks/${borrowedBookId}`)
                     .then((data) => {
                         setBorrowedBooks(borrowedBooks.filter((book) => book._id !== borrowedBookId));
-                        console.log('Book returned', data);
+                        //console.log('Book returned', data);
                         Swal.fire({
                             title: "Deleted!",
                             text: "Your borrowed book has been returned.",
@@ -34,11 +42,11 @@ const BorrowedBooks = () => {
                         });
 
                         // Increase book quantity using MongoDB's $inc operator
-                        axios.put(`http://localhost:5000/books/return/${bookId}`, {
+                        axios.put(`https://library-management-server-xi-six.vercel.app/books/return/${bookId}`, {
                             quantity: 1,
                         })
                             .then(data => {
-                                console.log('Book quantity increased', data);
+                                //console.log('Book quantity increased', data);
                             });
                     });
             }

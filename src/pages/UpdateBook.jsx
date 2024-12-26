@@ -6,12 +6,12 @@ import Swal from 'sweetalert2';
 const UpdateBook = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    console.log(id)
+    //console.log(id)
     const [book, setBook] = useState([]);
 
     useEffect(() => {
         // Fetch book details by ID
-        axios.get(`http://localhost:5000/books/details/${id}`)
+        axios.get(`https://library-management-server-xi-six.vercel.app/books/details/${id}`)
             .then((res) => {
                 setBook(res.data);
             })
@@ -26,9 +26,9 @@ const UpdateBook = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.put(`http://localhost:5000/books/update/${id}`, book)
+        axios.put(`https://library-management-server-xi-six.vercel.app/books/update/${id}`, book)
             .then((res) => {
-                console.log(res.data);
+                //console.log(res.data);
                 Swal.fire({
                     icon: 'success',
                     title: 'Book Updated',

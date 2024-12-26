@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../customHooks/useAxiosSecure';
 
 const AllBooks = () => {
-    const books = useLoaderData();
+    const [books, setBooks] = useState([]);
     const [view, setView] = useState('card');
     const navigate = useNavigate();
     const [showAvailable, setShowAvailable] = useState(false);
+    const axiosSecure = useAxiosSecure();
+
+    useEffect(() => {
+        axiosSecure.get('/books')
+            .then((res) => {
+                setBooks(res.data);
+            });
+    }, []);
 
     const filteredBooks = showAvailable
         ? books.filter((book) => book.quantity > 0)
@@ -25,8 +34,8 @@ const AllBooks = () => {
                 <button
                     onClick={() => setShowAvailable(!showAvailable)}
                     className={`border px-4 py-2 rounded text-sm transition-colors duration-300 ${showAvailable
-                            ? 'bg-green-600 text-white font-medium'
-                            : 'bg-red-500 text-white font-medium'
+                        ? 'bg-green-600 text-white font-medium'
+                        : 'bg-red-500 text-white font-medium'
                         }`}
                 >
                     {showAvailable ? 'Show All Books' : 'Show Available Books'}
