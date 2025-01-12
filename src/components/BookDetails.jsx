@@ -6,11 +6,11 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import BookCategory from './BookCategory';
 import { IoMdArrowBack } from 'react-icons/io';
+import useAxiosSecure from '../customHooks/useAxiosSecure';
 
 
 const BookDetails = () => {
     const book = useLoaderData();
-    //console.log(book)
     const { name, author, category, image, quantity, rating, shortDescription, bookContent } = book;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,12 +18,13 @@ const BookDetails = () => {
     const [borrowedBooks, setBorrowedBooks] = useState([]);
     const { user } = useAuth();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        axios.get(`http://localhosthttps://library-management-server-xi-six.vercel.app/borrowedBooks?email=${user.email}`)
-            .then(data => {
-                setBorrowedBooks(data.data);
-            })
+        axiosSecure.get(`/borrowedBooks?email=${user.email}`)
+            .then((res) => {
+                setBorrowedBooks(res.data);
+            });
     }, []);
 
     const handleSubmit = (e) => {
@@ -43,8 +44,7 @@ const BookDetails = () => {
         }
 
         if (book.quantity > 0) {
-
-            const isBookAlreadyBorrowed = borrowedBooks.map(borrowedBook => borrowedBook.bookId === book._id);
+            const isBookAlreadyBorrowed = borrowedBooks.some((borrowedBook) => borrowedBook.bookId === book._id);
             if (isBookAlreadyBorrowed) {
                 Swal.fire({
                     icon: 'error',
@@ -56,7 +56,7 @@ const BookDetails = () => {
             }
 
             // Decrease book quantity using MongoDB's $inc operator
-            axios.put(`http://localhosthttps://library-management-server-xi-six.vercel.app/books/${book._id}`, {
+            axios.put(`https://library-management-server-xi-six.vercel.app/books/${book._id}`, {
                 quantity: -1,
             })
                 .then(data => {
@@ -65,7 +65,7 @@ const BookDetails = () => {
 
 
             // Add to Borrowed Books List (you can store this in the DB or local storage)
-            axios.post('http://localhosthttps://library-management-server-xi-six.vercel.app/borrowedBooks', {
+            axios.post('https://library-management-server-xi-six.vercel.app/borrowedBooks', {
                 bookId: book._id,
                 bookImage: book.image,
                 bookName: book.name,
