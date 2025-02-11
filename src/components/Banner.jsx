@@ -10,7 +10,7 @@ import bannerImg3 from '../assets/banner3.jpg';
 
 const Banner = () => {
     return (
-        <div className="container mx-auto my-10 ">
+        <div className="container mx-auto my-12">
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={30}

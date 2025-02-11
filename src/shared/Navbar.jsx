@@ -10,6 +10,9 @@ const Navbar = () => {
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/about'}>About</Link></li>
         {
+            !user && <li><Link to={'/landing'}>Explore</Link></li>
+        }
+        {
             user &&
             <>
                 <li><Link to={'/books'}>All Books</Link></li>

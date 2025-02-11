@@ -25,6 +25,9 @@ const Footer = () => {
                             <li><Link to={'/'} className='hover:underline'>Home</Link></li>
                             <li><Link to={'/about'} className='hover:underline'>About</Link></li>
                             {
+                                !user && <li><Link to={'/landing'} className='hover:underline'>Explore</Link></li>
+                            }
+                            {
                                 user &&
                                 <>
                                     <li><Link to={'/books'} className='hover:underline'>All Books</Link></li>

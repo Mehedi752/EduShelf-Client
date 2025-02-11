@@ -14,6 +14,7 @@ import UpdateBook from "../pages/UpdateBook";
 import AddBooks from "../pages/AddBooks";
 import ErrorPage from "../pages/ErrorPage";
 import About from "../pages/About";
+import Landing from "../pages/Landing";
 
 
 const Router = createBrowserRouter([
@@ -29,6 +30,10 @@ const Router = createBrowserRouter([
             {
                 path: '/about',
                 element: <About></About>
+            },
+            {
+                path: '/landing',
+                element: <Landing></Landing>
             },
             {
                 path: '/auth/register',
