@@ -42,8 +42,8 @@ const Footer = () => {
                         <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
                         <p className="text-sm">
                             <strong>Email:</strong> eduShelf@school.com<br />
-                            <strong>Phone:</strong> +1 234 567 890<br />
-                            <strong>Address:</strong> 123 Library Lane, Knowledge City
+                            <strong>Phone:</strong> +880 1609531117<br />
+                            <strong>Address:</strong> Jashore, Khulna, Bangladesh
                         </p>
                     </div>
                 </div>
