@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import bannerImg1 from '../assets/banner1.jpg';
 import bannerImg2 from '../assets/banner2.jpg';
 import bannerImg3 from '../assets/banner3.jpg';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
     return (
@@ -32,6 +33,7 @@ const Banner = () => {
                             <p className="">
                                 Discover a wide range of books, resources, and tools to enhance your learning experience. Explore our collection today!
                             </p>
+                            <Link to={'/books'}><button className="btn bg-[#1a237e] text-white mt-2">See More</button></Link>
                         </div>
                     </SwiperSlide>
 
@@ -48,6 +50,7 @@ const Banner = () => {
                                 <strong>"Atomic Habits"</strong> by James Clear - Learn how small habits can lead to remarkable results.
                                 Available now in the library!
                             </p>
+                            <Link to={'/books'}><button className="btn bg-[#1a237e] text-white mt-2">See More</button></Link>
                         </div>
                     </SwiperSlide>
 
@@ -60,9 +63,10 @@ const Banner = () => {
                                 className="w-full h-full lg:h-[700px] object-cover rounded-lg mb-4"
                             />
                             <h2 className="text-3xl font-semibold mb-2">Easy Borrowing</h2>
-                            <p className="">
+                            <p className="mb-2">
                                 Borrow books hassle-free and manage your borrowed items online. Check out our policies for more information.
                             </p>
+                            <Link to={'/books'}><button className="btn bg-[#1a237e] text-white">See More</button></Link>
                         </div>
                     </SwiperSlide>
                 </div>
