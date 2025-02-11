@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import useAuth from '../customHooks/useAuth';
 
 const Footer = () => {
+    const {user} = useAuth();
     return (
         <div className='bg-[#d1f7c4] py-10'>
             <div className="container mx-auto px-4">
-              
+
                 <div className="flex flex-col lg:flex-row justify-between">
 
                     {/* About Section */}
@@ -19,18 +22,16 @@ const Footer = () => {
                     <div className='w-full lg:w-[20%]'>
                         <h2 className="text-xl font-semibold mb-4">Quick Links</h2>
                         <ul className="space-y-2">
-                            <li>
-                                <a href="/" className="hover:underline">Home</a>
-                            </li>
-                            <li>
-                                <a href="/all-books" className="hover:underline">All Books</a>
-                            </li>
-                            <li>
-                                <a href="/add-book" className="hover:underline">Add Book</a>
-                            </li>
-                            <li>
-                                <a href="/borrowed-books" className="hover:underline">Borrowed Books</a>
-                            </li>
+                            <li><Link to={'/'} className='hover:underline'>Home</Link></li>
+                            <li><Link to={'/about'} className='hover:underline'>About</Link></li>
+                            {
+                                user &&
+                                <>
+                                    <li><Link to={'/books'} className='hover:underline'>All Books</Link></li>
+                                    <li><Link to={'/addBooks'} className='hover:underline'>Add Books</Link></li>
+                                    <li><Link to={`/borrowedBooks/${user.email}`} className='hover:underline'>Borrowed Books</Link></li>
+                                </>
+                            }
                         </ul>
                     </div>
                     {/* Contact Section */}
