@@ -54,37 +54,39 @@ const BorrowedBooks = () => {
 
     }
     return (
-        <div className='container mx-auto py-12 px-5 lg:px-0'>
-            <h1 className="text-4xl font-semibold text-center mb-8">Your Borrowed Books</h1>
-            {borrowedBooks.length === 0 ? (
-                <p className="text-center text-gray-500">You haven't borrowed any books yet.</p>
-            ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {borrowedBooks.map((book) => (
-                        <div key={book._id} className="border rounded-lg shadow-md p-6">
-                            <img
-                                src={book.bookImage}
-                                alt={book.bookName}
-                                className="w-full h-48 object-cover rounded-md mb-4"
-                            />
-                            <h2 className="text-lg font-semibold mb-2">{book.bookName}</h2>
-                            <p className="text-sm text-gray-600">Category: {book.bookCategory}</p>
-                            <p className="text-sm text-gray-600">
-                                Borrowed Date: {new Date(book.borrowedDate).toLocaleDateString()}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                                Return Date: {new Date(book.returnDate).toLocaleDateString()}
-                            </p>
-                            <button onClick={() => handleReturnButton(book._id, book.bookId)}
+        <div className="bg-[#f3f3f3]">
+            <div className='container mx-auto py-12 px-5 lg:px-0'>
+                <h1 className="text-4xl text-gray-800 font-semibold text-center mb-8">Your Borrowed Books</h1>
+                {borrowedBooks.length === 0 ? (
+                    <p className="text-center text-gray-500">You haven't borrowed any books yet.</p>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {borrowedBooks.map((book) => (
+                            <div key={book._id} className="border-2 rounded-lg shadow-lg p-6">
+                                <img
+                                    src={book.bookImage}
+                                    alt={book.bookName}
+                                    className="w-full h-48 object-cover rounded-md mb-4"
+                                />
+                                <h2 className="text-lg font-semibold mb-2 text-gray-800">{book.bookName}</h2>
+                                <p className="text-sm text-gray-600">Category: {book.bookCategory}</p>
+                                <p className="text-sm text-gray-600">
+                                    Borrowed Date: {new Date(book.borrowedDate).toLocaleDateString()}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    Return Date: {new Date(book.returnDate).toLocaleDateString()}
+                                </p>
+                                <button onClick={() => handleReturnButton(book._id, book.bookId)}
 
-                                className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
-                            >
-                                Return
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            )}
+                                    className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+                                >
+                                    Return
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

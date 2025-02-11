@@ -26,7 +26,8 @@ const AllBooks = () => {
     }
 
     return (
-        <div className='container mx-auto py-10 px-5 lg:px-0'>
+        <div className="bg-[#f3f3f3]">
+            <div className='container mx-auto py-10 px-5 lg:px-0 text-gray-800'>
             <h1 className="text-4xl font-semibold text-center mb-8">All Books</h1>
 
             {/* View Toggle */}
@@ -43,7 +44,7 @@ const AllBooks = () => {
                 <select
                     value={view}
                     onChange={(e) => setView(e.target.value)}
-                    className="border border-gray-300 rounded px-4 py-2 text-sm"
+                    className="border border-gray-300 bg-[#f3f3f3]  rounded px-4 py-2 text-sm"
                 >
                     <option value="card">Card View</option>
                     <option value="table">Table View</option>
@@ -54,13 +55,13 @@ const AllBooks = () => {
             {view === 'card' && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {filteredBooks.map((book) => (
-                        <div key={book._id} className="border rounded-lg shadow-md p-8">
+                        <div key={book._id} className="border-2 rounded-lg shadow-xl p-8">
                             <img
                                 src={book.image}
                                 alt={book.name}
                                 className="w-full h-48 object-cover rounded-md mb-4"
                             />
-                            <h2 className="text-lg font-semibold">{book.name}</h2>
+                            <h2 className="text-lg font-semibold text-gray-600">{book.name}</h2>
                             <p className="text-gray-600">Author: {book.author}</p>
                             <p className="text-gray-600">Category: {book.category}</p>
                             <p className="text-gray-600">Rating: {book.rating}</p>
@@ -115,6 +116,7 @@ const AllBooks = () => {
                     </tbody>
                 </table>
             )}
+        </div>
         </div>
     );
 };

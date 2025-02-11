@@ -6,7 +6,7 @@ const Footer = () => {
     const {user} = useAuth();
     return (
         <div className='bg-[#d1f7c4] py-10'>
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 text-gray-800">
 
                 <div className="flex flex-col lg:flex-row justify-between">
 

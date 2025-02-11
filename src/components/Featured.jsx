@@ -25,13 +25,13 @@ const features = [
 
 const Featured = () => {
     return (
-        <div className="py-20 bg-[#ebe3f9]">
+        <div className="py-12 bg-[#f3f3f3] ">
             <div className="container mx-auto px-5 lg:px-0">
                 <motion.h2
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="text-5xl font-bold text-center text-gray-800 mb-10"
+                    className="text-4xl font-semibold text-center mb-10 text-gray-800"
                 >
                     Why Choose Us
                 </motion.h2>
@@ -47,11 +47,11 @@ const Featured = () => {
                                 scale: 1.05,
                                 boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.2)",
                             }}
-                            className="bg-white p-8 rounded-xl shadow-lg flex flex-col items-center text-center"
+                            className="bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center"
                         >
                             <div className="mb-4">{feature.icon}</div>
-                            <h3 className="text-2xl font-semibold text-gray-700">{feature.title}</h3>
-                            <p className="text-gray-500 mt-2">{feature.description}</p>
+                            <h3 className="text-2xl font-semibold text-blue-300">{feature.title}</h3>
+                            <p className="text-gray-400 mt-2">{feature.description}</p>
                         </motion.div>
                     ))}
                 </div>

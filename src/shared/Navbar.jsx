@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import logoImg from '../assets/logo.png';
 import useAuth from "../customHooks/useAuth";
 
@@ -22,6 +22,16 @@ const Navbar = () => {
         }
     </>
 
+    // Theme Toggler.
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    };
+
     const handleLogOut = () => {
         signOutUser()
             .then(() => {
@@ -34,7 +44,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="bg-[#d1f7c4] py-5 fixed w-full z-50 top-0">
+        <div className="bg-[#d1f7c4] text-gray-800 py-5 fixed w-full z-50 top-0">
             <div className="container mx-auto">
                 <div className="navbar flex items-center">
                     <div className="navbar-start">
@@ -62,7 +72,7 @@ const Navbar = () => {
 
                         <div className="flex items-center gap-2">
                             <img src={logoImg} alt="" className="w-10 h-10" />
-                            <h3 className="text-2xl">EduShelf</h3>
+                            <h3 className="text-2xl text-gray-800">EduShelf</h3>
                         </div>
 
                     </div>
@@ -72,6 +82,43 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end gap-5">
+                    <div className="text-gray-800">
+                            <label className="flex cursor-pointer gap-2">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="5" />
+                                    <path
+                                        d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                                </svg>
+                                <input
+                                    type="checkbox"
+                                    checked={theme === "dark"}
+                                    onChange={toggleTheme}
+                                    className="toggle theme-controller"
+                                />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                            </label>
+                        </div>
+
                         {
                             user && user.photoURL ? (
                                 <div className="relative group">
