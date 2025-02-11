@@ -25,7 +25,7 @@ const features = [
 
 const Featured = () => {
     return (
-        <div className="py-20 bg-gradient-to-br from-purple-50 to-pink-100">
+        <div className="py-20 bg-[#ebe3f9]">
             <div className="container mx-auto px-5 lg:px-0">
                 <motion.h2
                     initial={{ opacity: 0, y: -50 }}

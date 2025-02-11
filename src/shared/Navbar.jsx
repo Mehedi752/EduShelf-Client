@@ -34,7 +34,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="bg-[#d1f7c4] py-5">
+        <div className="bg-[#d1f7c4] py-5 fixed w-full z-50 top-0">
             <div className="container mx-auto">
                 <div className="navbar flex items-center">
                     <div className="navbar-start">

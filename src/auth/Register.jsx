@@ -148,9 +148,9 @@ const Register = () => {
                     <Link to={"/"} className="text-gray-700 flex items-center gap-2 text-3xl font-normal font-['Rancho']">
                         <IoMdArrowBack /> Back to home</Link>
                 </div>
-                <div className='px-10 lg:px-[300px]'>
+                <div className='px-6 lg:px-[300px]'>
 
-                    <div className='bg-white px-12 lg:px-[80px] py-8 lg:py-[60px]'>
+                    <div className='bg-white px-8 lg:px-[80px] py-8 lg:py-[60px]'>
                         <h3 className='text-center text-[#403f3f] text-[24px] lg:text-[35px] font-semibold'>
                             Register your account
                         </h3>

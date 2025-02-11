@@ -87,8 +87,8 @@ const Login = () => {
                     <Link to={"/"} className="text-gray-700 flex items-center gap-2 text-2xl lg:text-3xl font-normal font-['Rancho']">
                         <IoMdArrowBack /> Back to home</Link>
                 </div>
-                <div className='lg:px-[300px] px-10'>
-                    <div className='bg-white px-12 lg:px-[96px] py-8 lg:py-[76px]'>
+                <div className='lg:px-[300px] px-6'>
+                    <div className='bg-white px-8 lg:px-[96px] py-8 lg:py-[76px]'>
                         <h3 className='text-center text-[#403f3f] text-[24px] lg:text-[35px] font-semibold'>
                             Login your account
                         </h3>
