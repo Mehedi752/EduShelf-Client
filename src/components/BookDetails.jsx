@@ -103,7 +103,7 @@ const BookDetails = () => {
     return (
         <div className='container mx-auto py-12 px-5 lg:px-0'>
 
-            <h1 className="text-4xl font-semibold text-center mb-12">Book Details</h1>
+            <h1 className="text-4xl font-bold text-center mb-12">Book Details</h1>
 
             <div className="mb-12">
                 <Link to={`/books/${category}`} className="text-gray-700 flex items-center gap-2 text-2xl lg:text-3xl font-normal font-['Rancho']">

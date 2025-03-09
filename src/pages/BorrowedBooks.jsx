@@ -55,7 +55,7 @@ const BorrowedBooks = () => {
     }
     return (
         <div className='container mx-auto py-12 px-5 lg:px-0'>
-            <h1 className="text-4xl font-semibold text-center mb-8">Your Borrowed Books</h1>
+            <h1 className="text-4xl font-bold text-center mb-8">Your Borrowed Books</h1>
             {borrowedBooks.length === 0 ? (
                 <p className="text-center text-gray-500">You haven't borrowed any books yet.</p>
             ) : (

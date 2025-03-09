@@ -27,7 +27,7 @@ const AllBooks = () => {
 
     return (
         <div className='container mx-auto py-10 px-5 lg:px-0'>
-            <h1 className="text-4xl font-semibold text-center mb-8">All Books</h1>
+            <h1 className="text-4xl font-bold text-center mb-8">All Books</h1>
 
             {/* View Toggle */}
             <div className="flex justify-between items-center mb-4 flex-wrap gap-4">

@@ -44,7 +44,7 @@ const UpdateBook = () => {
         <div className="bg-[#f3f3f3]">
             <div className="container mx-auto py-12 px-5 md:px-[100px] lg:px-[400px]">
                 <div className="bg-white p-10 md:p-[50px] lg:p-[100px] rounded-[10px] shadow-lg">
-                    <h1 className="text-3xl font-semibold text-center mb-8">Update Book</h1>
+                    <h1 className="text-3xl font-bold text-center mb-8">Update Book</h1>
                     <form onSubmit={handleSubmit} className="mx-auto space-y-6">
                         <div className="mb-4">
                             <label className='label'>
